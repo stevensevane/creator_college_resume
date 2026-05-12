@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creator College — Base de Connaissances</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory:   #FAF9F5;
+    --paper:   #FFFFFF;
+    --slate:   #141413;
+    --clay:    #D97757;
+    --clay-d:  #B85C3E;
+    --oat:     #E3DACC;
+    --olive:   #788C5D;
+    --beige:   #F0DCC8;
+    --attract: #4B6EFA;
+    --nurture: #A21CAF;
+    --position:#854D0E;
+    --convert: #EA580C;
+    --g100:    #F0EEE6;
+    --g200:    #E6E3DA;
+    --g300:    #D1CFC5;
+    --g500:    #87867F;
+    --g700:    #3D3D3A;
+    --mint:    #E8F5EE;
+    --mint-d:  #2E7D55;
+    --serif:   ui-serif, Georgia, "Times New Roman", serif;
+    --sans:    "Instrument Sans", system-ui, -apple-system, sans-serif;
+    --mono:    ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ivory);
+    color: var(--slate);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  /* ══ NAV ══ */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--slate);
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 0 24px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--g300);
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-right: 16px;
+    padding: 14px 16px 14px 0;
+    border-right: 1px solid var(--g700);
+    flex-shrink: 0;
+  }
+
+  nav button {
+    background: none;
+    border: none;
+    color: var(--g300);
+    font-family: var(--sans);
+    font-size: 13px;
+    padding: 14px 13px;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  nav button:hover { color: white; }
+  nav button.active { color: var(--clay); border-bottom-color: var(--clay); }
+
+  /* ══ LAYOUT ══ */
+  .page { display: block; padding: 0 32px 80px; max-width: 1100px; margin: 0 auto; }
+  .page + .page {
+    border-top: 2px solid var(--g300);
+    padding-top: 60px;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    padding: 52px 0 40px;
+    border-bottom: 1.5px solid var(--g300);
+    margin-bottom: 52px;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--g500);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 3px;
+    background: var(--clay);
+    flex-shrink: 0;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.06;
+    letter-spacing: -0.018em;
+    margin-bottom: 16px;
+  }
+  .hero h1 em { color: var(--clay); font-style: italic; }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--g700);
+    max-width: 600px;
+    line-height: 1.55;
+  }
+
+  /* ══ BLOCKS ══ */
+  .block { margin-bottom: 52px; }
+  .block-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1.5px solid var(--g200);
+  }
+  .block-title h2 {
+    font-family: var(--serif);
+    font-size: 26px;
+    letter-spacing: -0.01em;
+    color: var(--slate);
+    margin: 0;
+  }
+  .badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: var(--g200);
+    color: var(--g700);
+    flex-shrink: 0;
+  }
+  .badge.clay { background: #FDF0EA; color: var(--clay-d); }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 12px;
+    color: var(--slate);
+  }
+
+  /* ══ QUOTE ══ */
+  blockquote {
+    background: var(--mint);
+    border-left: 4px solid var(--mint-d);
+    border-radius: 0 10px 10px 0;
+    padding: 18px 22px;
+    margin: 22px 0;
+  }
+  blockquote p {
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #1a3328;
+    margin-bottom: 10px;
+  }
+  blockquote p:last-of-type { margin-bottom: 0; }
+  .quote-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  /* ══ DAY PILLS ══ */
+  .day-pill {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 20px;
+    letter-spacing: 0.04em;
+  }
+  .d1 { background: #EEF2FF; color: #3558e8; }
+  .d2 { background: #FFF3E0; color: #E65100; }
+  .d3 { background: #F3E5F5; color: #7B1FA2; }
+  .d4 { background: #E8F5E9; color: #2E7D32; }
+  .d5 { background: #FFF8E1; color: #F57F17; }
+
+  /* ══ CALLOUT ══ */
+  .callout {
+    background: var(--g100);
+    border-left: 4px solid var(--clay);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 14px;
+    color: var(--g700);
+    line-height: 1.6;
+  }
+  .callout strong { color: var(--slate); }
+  .callout.warn { border-color: #DC2626; background: #FEF2F2; }
+  .callout.success { border-color: var(--olive); background: #F0FDF4; }
+
+  /* ══ STEPS ══ */
+  .steps-list { list-style: none; }
+  .steps-list li {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--g200);
+  }
+  .steps-list li:last-child { border-bottom: none; margin-bottom: 0; }
+  .step-num {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--clay);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .step-num.alt { background: var(--slate); }
+  .step-content { flex: 1; }
+  .step-title { font-weight: 700; margin-bottom: 4px; font-size: 15px; }
+  .step-desc { font-size: 14px; color: var(--g700); line-height: 1.55; }
+
+  /* ══ CHECKLIST ══ */
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--g200);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--g300);
+    border-radius: 5px;
+    margin-top: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+  .check-box.done { background: var(--olive); border-color: var(--olive); color: white; }
+  .check-text.done { text-decoration: line-through; color: var(--g500); }
+
+  /* ══ MISSION CARDS ══ */
+  .missions-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .mission-card {
+    border-radius: 12px;
+    padding: 22px 18px;
+    border: 1.5px solid transparent;
+  }
+  .mission-card.attract { background: #EEF2FF; border-color: #C7D2FE; }
+  .mission-card.nurture { background: #FDF4FF; border-color: #F0ABFC; }
+  .mission-card.position { background: #FEFCE8; border-color: #FDE047; }
+  .mission-card.convert { background: #FFF7ED; border-color: #FED7AA; }
+  .mission-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .attract .mission-label { color: var(--attract); }
+  .nurture .mission-label { color: var(--nurture); }
+  .position .mission-label { color: var(--position); }
+  .convert .mission-label { color: var(--convert); }
+  .mission-goal { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .mission-desc { font-size: 13px; color: var(--g700); line-height: 1.5; margin-bottom: 12px; }
+  .mission-examples { list-style: none; font-size: 12.5px; color: var(--g700); }
+  .mission-examples li {
+    padding: 4px 0 4px 14px;
+    position: relative;
+    line-height: 1.45;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .mission-examples li:last-child { border-bottom: none; }
+  .mission-examples li::before { content: '→'; position: absolute; left: 0; color: var(--g500); }
+
+  /* ══ MISSION PILLS ══ */
+  .mission-pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 2px 9px;
+    border-radius: 100px;
+  }
+  .pill-attract { background: #EEF2FF; color: var(--attract); }
+  .pill-nurture { background: #FDF4FF; color: var(--nurture); }
+  .pill-position { background: #FEFCE8; color: var(--position); }
+  .pill-convert { background: #FFF7ED; color: var(--convert); }
+
+  /* ══ HOOK CARDS ══ */
+  .hooks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .hook-card {
+    background: var(--paper);
+    border: 1.5px solid var(--g200);
+    border-radius: 10px;
+    padding: 20px;
+    transition: border-color 0.15s;
+  }
+  .hook-card:hover { border-color: var(--clay); }
+  .hook-number {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--clay);
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .hook-name { font-weight: 700; font-size: 17px; margin-bottom: 6px; }
+  .hook-principle {
+    font-size: 13.5px;
+    color: var(--g700);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .hook-example {
+    background: var(--g100);
+    border-left: 3px solid var(--clay);
+    padding: 10px 13px;
+    font-size: 13px;
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: var(--g700);
+    line-height: 1.55;
+  }
+  .hook-tip {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--g500);
+    font-style: italic;
+  }
+
+  /* ══ TABLES ══ */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .data-table th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--g500);
+    padding: 9px 14px;
+    background: var(--g100);
+    border-bottom: 1.5px solid var(--g300);
+  }
+  .data-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--g200);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: #FAFAF8; }
+
+  /* ══ COMPARE TABLE ══ */
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 14px; border-radius: 10px; overflow: hidden; }
+  .compare-table th { padding: 12px 16px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+  .compare-table th:first-child { background: #FEF2F2; color: #991B1B; }
+  .compare-table th:last-child  { background: #F0FDF4; color: #166534; }
+  .compare-table td { padding: 11px 16px; border-bottom: 1px solid var(--g200); font-size: 13.5px; }
+  .compare-table td:first-child { background: #FFFBFB; color: #7F1D1D; border-right: 1px solid var(--g200); }
+  .compare-table td:last-child  { background: #F8FFF8; color: #14532D; }
+  .compare-table tr:last-child td { border-bottom: none; }
+
+  /* ══ FORMATS GRID ══ */
+  .formats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .format-card {
+    background: var(--paper);
+    border: 1.5px solid var(--g200);
+    border-radius: 10px;
+    padding: 22px 20px;
+    transition: border-color 0.15s;
+  }
+  .format-card:hover { border-color: var(--clay); }
+  .format-icon { font-size: 28px; margin-bottom: 10px; line-height: 1; }
+  .format-name { font-weight: 700; font-size: 15px; margin-bottom: 5px; }
+  .format-time { font-family: var(--mono); font-size: 11px; color: var(--clay); letter-spacing: 0.06em; margin-bottom: 8px; }
+  .format-desc { font-size: 13.5px; color: var(--g700); line-height: 1.55; }
+
+  /* ══ METRIC ROWS ══ */
+  .metric-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: var(--paper);
+    border: 1.5px solid var(--g200);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: border-color 0.15s;
+  }
+  .metric-row:hover { border-color: var(--clay); }
+  .metric-rank {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .rank-1 { background: var(--clay); color: white; }
+  .rank-2 { background: var(--g200); color: var(--g700); }
+  .rank-3 { background: var(--g200); color: var(--g700); }
+  .metric-content { flex: 1; }
+  .metric-name { font-weight: 700; font-size: 15px; margin-bottom: 2px; }
+  .metric-desc { font-size: 13px; color: var(--g700); line-height: 1.4; }
+  .metric-bar { flex-shrink: 0; width: 80px; height: 6px; background: var(--g200); border-radius: 3px; overflow: hidden; }
+  .metric-fill { height: 100%; border-radius: 3px; background: var(--clay); }
+
+  /* ══ FORMULA ══ */
+  .formula-box {
+    background: var(--slate);
+    color: white;
+    border-radius: 14px;
+    padding: 36px;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .formula-text {
+    font-family: var(--mono);
+    font-size: clamp(18px, 3vw, 28px);
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .formula-text span { color: var(--clay); }
+  .formula-sub { font-size: 14px; color: var(--g300); font-style: italic; }
+
+  /* ══ STUDY BIG NUMBERS ══ */
+  .study-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  .study-step {
+    background: var(--paper);
+    border: 1.5px solid var(--g200);
+    border-radius: 10px;
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .study-big { font-family: var(--serif); font-size: 42px; font-weight: 700; color: var(--clay); margin-bottom: 6px; line-height: 1; }
+  .study-label { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .study-sub { font-size: 12px; color: var(--g500); }
+
+  /* ══ NOZONE ══ */
+  .nozone-wrap { display: flex; gap: 36px; align-items: flex-start; flex-wrap: wrap; }
+  .nozone-visual {
+    background: var(--slate);
+    border-radius: 18px;
+    aspect-ratio: 9/16;
+    width: 180px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .nozone-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 28%;
+    background: rgba(239,68,68,0.35); border-top: 2px dashed #EF4444;
+    display: flex; align-items: flex-start; justify-content: center; padding-top: 6px;
+  }
+  .nozone-right {
+    position: absolute; top: 0; right: 0; bottom: 28%; width: 22%;
+    background: rgba(239,68,68,0.35); border-left: 2px dashed #EF4444;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nozone-safe {
+    position: absolute; top: 14px; left: 14px; right: 24%; height: 38%;
+    background: rgba(34,197,94,0.15); border: 2px solid rgba(34,197,94,0.5);
+    border-radius: 6px; display: flex; align-items: center; justify-content: center;
+  }
+  .nozone-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .nozone-label.red { color: #FCA5A5; }
+  .nozone-label.green { color: #86EFAC; }
+  .nozone-desc { flex: 1; min-width: 220px; }
+
+  /* ══ RESULTS ══ */
+  .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin: 20px 0; }
+  .result-card {
+    background: var(--paper);
+    border: 1.5px solid var(--g200);
+    border-radius: 10px;
+    padding: 18px 20px;
+    transition: border-color 0.15s;
+  }
+  .result-card:hover { border-color: var(--clay); }
+  .result-name { font-weight: 700; font-size: 14px; margin-bottom: 2px; }
+  .result-from { font-size: 12px; color: var(--g500); margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--g200); line-height: 1.4; }
+  .result-stat { font-size: 26px; font-weight: 700; color: var(--clay); font-family: var(--serif); line-height: 1.1; letter-spacing: -0.02em; }
+  .result-detail { font-size: 12px; color: var(--g700); margin-top: 5px; line-height: 1.5; }
+
+  /* ══ PIEGE LIST ══ */
+  .piege-list { list-style: none; }
+  .piege-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--g200);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .piege-item:last-child { border-bottom: none; }
+  .piege-icon { flex-shrink: 0; font-size: 15px; margin-top: 1px; }
+  .piege-text strong { display: block; font-size: 14px; color: #C62828; margin-bottom: 2px; }
+  .piege-text span { font-size: 13px; color: var(--g700); }
+
+  /* ══ INFO CHIPS ══ */
+  .info-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+  .info-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--paper);
+    border: 1.5px solid var(--g200);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+  .chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--olive); flex-shrink: 0; }
+
+  /* ══ MAP FRAMEWORK ══ */
+  .map-4 { display: grid; grid-template-columns: auto 1fr 1fr; gap: 6px; margin: 20px 0; font-size: 14px; }
+  .map-h { padding: 10px 14px; background: var(--slate); color: white; font-weight: 600; font-size: 11px; letter-spacing: 0.05em; border-radius: 4px; text-align: center; }
+  .map-label { padding: 12px 10px; background: var(--g100); font-weight: 600; font-size: 13px; color: var(--g700); border-radius: 6px; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.3; }
+  .map-go { padding: 16px; background: #F0FDF4; border: 1.5px solid #86EFAC; border-radius: 8px; text-align: center; }
+  .map-wait { padding: 16px; background: #FFF7ED; border: 1.5px solid #FED7AA; border-radius: 8px; text-align: center; font-style: italic; color: var(--g700); font-size: 13px; }
+  .map-go-label { font-family: var(--mono); font-size: 10px; color: #166534; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+  .map-go-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+  .map-go-desc { font-size: 12.5px; color: var(--g700); line-height: 1.4; }
+
+  /* ══ CODE BLOCK ══ */
+  .code-block {
+    background: #1E1E1E;
+    border-radius: 10px;
+    padding: 24px 26px;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.75;
+    color: #D4D4D4;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+  .code-block .comment { color: #6A9955; }
+  .code-block .key { color: #9CDCFE; }
+  .code-block .val { color: #CE9178; }
+
+  /* ══ FUNNEL FLOW ══ */
+  .funnel-flow { display: flex; align-items: stretch; gap: 0; margin-bottom: 24px; flex-wrap: wrap; }
+  .funnel-step-box {
+    background: var(--paper);
+    border: 1.5px solid var(--g200);
+    padding: 20px 16px;
+    flex: 1;
+    min-width: 140px;
+  }
+  .funnel-step-box:first-child { border-radius: 10px 0 0 10px; }
+  .funnel-step-box:last-child { border-radius: 0 10px 10px 0; border-color: var(--clay); }
+  .funnel-step-num { font-family: var(--mono); font-size: 10px; color: var(--g500); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+  .funnel-step-name { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+  .funnel-step-desc { font-size: 12.5px; color: var(--g700); line-height: 1.4; }
+  .funnel-arrow-box { display: flex; align-items: center; padding: 0 6px; background: var(--g100); color: var(--clay); font-size: 20px; }
+
+  /* ══ PARTNER TABLE ══ */
+  .partner-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .partner-table th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--g500);
+    padding: 8px 12px;
+    border-bottom: 1.5px solid var(--g300);
+  }
+  .partner-table td { padding: 11px 12px; border-bottom: 1px solid var(--g200); vertical-align: top; }
+  .partner-table tr:last-child td { border-bottom: none; }
+  .status-dot { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; }
+  .status-dot::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; }
+  .status-dot.actif::before  { background: var(--olive); }
+  .status-dot.prosp::before  { background: var(--clay); }
+  .status-dot.negoc::before  { background: #F59E0B; }
+  .status-dot.relance::before { background: var(--g500); }
+  .status-dot.decline::before { background: #EF4444; }
+
+  /* ══ RESPONSIVE ══ */
+  @media (max-width: 900px) { .missions-grid { grid-template-columns: 1fr 1fr; } .formats-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 680px) { .missions-grid { grid-template-columns: 1fr; } .formats-grid { grid-template-columns: 1fr; } .study-steps { grid-template-columns: 1fr; } .page { padding: 0 16px 60px; } .nozone-visual { width: 140px; } }
+  @media (max-width: 540px) { .hooks-grid { grid-template-columns: 1fr; } .results-grid { grid-template-columns: 1fr 1fr; } }
+
+  p { margin-bottom: 10px; }
+  p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="nav-logo">Creator College</div>
+  <button class="active" data-page="mindset" onclick="scrollTo('mindset')">Mindset</button>
+  <button data-page="niche" onclick="scrollTo('niche')">Identité</button>
+  <button data-page="missions" onclick="scrollTo('missions')">4 Missions</button>
+  <button data-page="hooks" onclick="scrollTo('hooks')">5 Hooks</button>
+  <button data-page="formats" onclick="scrollTo('formats')">Formats</button>
+  <button data-page="production" onclick="scrollTo('production')">Production</button>
+  <button data-page="vendre" onclick="scrollTo('vendre')">Vendre</button>
+  <button data-page="ia" onclick="scrollTo('ia')">IA & Workflow</button>
+  <button data-page="monetisation" onclick="scrollTo('monetisation')">Monétisation</button>
+</nav>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 01 MINDSET -->
+<!-- ══════════════════════════════════════ -->
+<div id="mindset" class="page active">
+  <div class="hero">
+    <div class="eyebrow">Creator College — Day 1 & 2</div>
+    <h1>Mindset &amp; <em>Fondations</em></h1>
+    <p class="hero-sub">La compréhension de la psychologie — pas le talent, pas les tendances — est ce qui sépare les 1% des 99%. La croissance est une compétence apprise.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Le Pourquoi — fondation non négociable</h2></div>
+    <blockquote>
+      <p>"When your why is strong, the how becomes quite easy."</p>
+      <div class="quote-meta"><span class="day-pill d1">Day 1</span><span class="day-pill d2">Day 2</span></div>
+    </blockquote>
+    <blockquote>
+      <p>"Many of you guys have never even thought about your why, and that's the reason you will never win. You will always, always be in the 99%."</p>
+      <div class="quote-meta"><span class="day-pill d2">Day 2</span></div>
+    </blockquote>
+    <p style="font-size:15px; color:var(--g700); margin-top:16px">Le contenu n'est qu'un <strong>véhicule</strong>. La destination = la transformation que tu veux créer. Sans why solide, on abandonne au premier obstacle.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Good Enough beats Perfect</h2><span class="badge clay">Day 1</span></div>
+    <blockquote>
+      <p>"You're waiting to be perfect. None of you have to wait to be somebody. You already are someone... Good Enough is all we're pursuing. But the beauty behind Good Enough is that the skill that you're about to build will happen significantly faster."</p>
+      <div class="quote-meta"><span class="day-pill d1">Day 1</span></div>
+    </blockquote>
+    <ul class="checklist">
+      <li><div class="check-box"></div><span class="check-text">Ne pas attendre d'être parfait pour commencer — les reps construisent l'intuition</span></li>
+      <li><div class="check-box"></div><span class="check-text">Ce que tu crois être un désavantage (vie ordinaire) est ce qui te rend relatable</span></li>
+      <li><div class="check-box"></div><span class="check-text">Comprendre la psychologie du viewer > copier les tendances</span></li>
+    </ul>
+    <blockquote>
+      <p>"I have a very massive audience, not because I'm more talented than you, but because I understand psychology, and I want you to start to understand it too."</p>
+      <div class="quote-meta"><span class="day-pill d1">Day 1</span></div>
+    </blockquote>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>L'Inflection Point</h2></div>
+    <blockquote>
+      <p>"For me, it was like my first 200 posts all sucked. They sucked. There's an inflection point where it actually becomes easy... Eventually, if you keep running, what ultimately happens is you get to a finish line."</p>
+      <div class="quote-meta"><span class="day-pill d2">Day 2</span></div>
+    </blockquote>
+    <div class="callout">La courbe n'est pas linéaire. Les 100–200 premiers posts "semblent mauvais" — c'est normal. Le décollage arrive après ce seuil. Planifier 90 jours, pas 2 semaines.</div>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Builders vs Watchers</h2></div>
+    <blockquote>
+      <p>"The watchers, the ones that are going to take notes. They're going to feel inspired. But they're going to close the tab and go back to scrolling. The builders are the ones that are going to take notes today, feel inspired today and actually go do something about what they're doing."</p>
+      <div class="quote-meta"><span class="day-pill d2">Day 2</span></div>
+    </blockquote>
+    <blockquote>
+      <p>"Content creation is just a vehicle. It's a vehicle to a transformed state. It's a vehicle to actually support and provide for that why."</p>
+      <div class="quote-meta"><span class="day-pill d2">Day 2</span></div>
+    </blockquote>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Ce qui fait échouer les créateurs</h2></div>
+    <ul class="piege-list">
+      <li class="piege-item"><span class="piege-icon">⚠️</span><div class="piege-text"><strong>Pas de why solide</strong><span>S'attendre à un succès immédiat ; abandonner dès les premières difficultés parce que la mission n'est pas claire</span></div></li>
+      <li class="piege-item"><span class="piege-icon">⚠️</span><div class="piege-text"><strong>Incohérence</strong><span>Poster, s'arrêter, recommencer. L'algorithme punit l'irrégularité — et le cerveau créateur perd son rythme</span></div></li>
+      <li class="piege-item"><span class="piege-icon">⚠️</span><div class="piege-text"><strong>Pas de système</strong><span>Créer au feeling sans framework reproductible = fatigue créative garantie, résultats aléatoires</span></div></li>
+      <li class="piege-item"><span class="piege-icon">⚠️</span><div class="piege-text"><strong>Ignorer les missions</strong><span>Poster du contenu sans objectif clair pour chaque post = énergie dépensée sans direction</span></div></li>
+      <li class="piege-item"><span class="piege-icon">⚠️</span><div class="piege-text"><strong>Attente de perfection</strong><span>Le perfectionnisme paralyse l'action. "Good enough" permet d'agir, d'apprendre, et de progresser réellement</span></div></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 02 NICHE / IDENTITÉ -->
+<!-- ══════════════════════════════════════ -->
+<div id="niche" class="page">
+  <div class="hero">
+    <div class="eyebrow">Creator College — Day 1</div>
+    <h1>Tu es <em>la niche</em></h1>
+    <p class="hero-sub">Ton identité, tes valeurs et ton approche unique SONT ta niche. Tes abonnés te suivent, toi — pas ton sujet.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Le principe fondateur</h2></div>
+    <blockquote>
+      <p>"You are the niche. The old way told you to niche down... The new way, becoming the niche, gives you more topic flexibility, it stays fresh as you evolve, your audience grows with you, and your followers champion you. They champion you not your topic."</p>
+      <div class="quote-meta"><span class="day-pill d1">Day 1</span></div>
+    </blockquote>
+    <blockquote>
+      <p>"Your story builds the deepest amount of trust because it shows you don't just teach it, you actually live it."</p>
+      <div class="quote-meta"><span class="day-pill d1">Day 1</span></div>
+    </blockquote>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Les 3 Piliers de contenu</h2></div>
+    <div class="missions-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="mission-card attract">
+        <div class="mission-label">Pilier 1</div>
+        <div class="mission-goal">Skill — Ce que tu sais</div>
+        <div class="mission-desc">Ton expertise professionnelle, tes formations, certifications, ce que les gens te demandent d'expliquer.</div>
+        <ul class="mission-examples"><li>4 posts Skill par semaine</li><li>Analyses, comparatifs, décryptages</li></ul>
+      </div>
+      <div class="mission-card nurture">
+        <div class="mission-label">Pilier 2</div>
+        <div class="mission-goal">Passion — Ce que tu aimes</div>
+        <div class="mission-desc">Tes centres d'intérêt authentiques, ce qui te fait lever le matin, ce que tu ferais sans être payé.</div>
+        <ul class="mission-examples"><li>1 post Passion par semaine</li><li>Liberté de ton, authenticité</li></ul>
+      </div>
+      <div class="mission-card convert">
+        <div class="mission-label">Pilier 3</div>
+        <div class="mission-goal">Story — Comment tu as transformé</div>
+        <div class="mission-desc">Tes moments de bascule (même petits), erreurs et apprentissages, avant/après des états pas des résultats matériels.</div>
+        <ul class="mission-examples"><li>2 posts Story par semaine</li><li>Connexion émotionnelle profonde</li></ul>
+      </div>
+    </div>
+    <div class="callout">Planning recommandé : <strong>4 posts Skill · 2 posts Story · 1 post Passion</strong> par semaine.</div>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Voice Statement — 3 questions fondatrices</h2></div>
+    <ol class="steps-list">
+      <li><div class="step-num">1</div><div class="step-content"><div class="step-title">Quelle vue contraire as-tu ?</div><div class="step-desc">Qu'est-ce que tu penses différemment de ton industrie ou de la société ? Qu'est-ce qui t'énerve dans ce qui est dit habituellement ?</div></div></li>
+      <li><div class="step-num">2</div><div class="step-content"><div class="step-title">Pour quoi vient-on te voir ?</div><div class="step-desc">Qu'est-ce que tes amis et ta famille te demandent en premier quand ils ont un problème dans ton domaine ?</div></div></li>
+      <li><div class="step-num">3</div><div class="step-content"><div class="step-title">Quel changement veux-tu voir ?</div><div class="step-desc">Quelle transformation concrète veux-tu créer dans la vie de ton audience ? Qu'est-ce qui disparaîtrait si tu réussissais ?</div></div></li>
+    </ol>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>La psychologie du Follow — 4 étapes</h2></div>
+    <blockquote>
+      <p>"People don't just follow you because of one post. You're looking at the wrong metric. It's because the rest of your content sucks... You don't realize that it requires other attributions from your personality and your lifestyle."</p>
+      <div class="quote-meta"><span class="day-pill d1">Day 1</span></div>
+    </blockquote>
+    <ol class="steps-list">
+      <li><div class="step-num alt">1</div><div class="step-content"><div class="step-title">Découverte</div><div class="step-desc">Le viewer voit un post — il paraît intéressant</div></div></li>
+      <li><div class="step-num alt">2</div><div class="step-content"><div class="step-title">Évaluation du profil</div><div class="step-desc">Il va sur ton profil — es-tu experte ? Es-tu authentique ? Le profil entier doit être cohérent</div></div></li>
+      <li><div class="step-num alt">3</div><div class="step-content"><div class="step-title">Connexion au-delà de l'expertise</div><div class="step-desc">Y a-t-il quelque chose de plus ? Des valeurs partagées ? Une personnalité reconnaissable ?</div></div></li>
+      <li><div class="step-num">4</div><div class="step-content"><div class="step-title">Follow — grâce à la Story</div><div class="step-desc"><strong>Les follows se gagnent à l'étape 4, pas à l'étape 1.</strong> La story crée la connexion profonde qui déclenche le follow.</div></div></li>
+    </ol>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Expert Talk vs Symptom-First</h2></div>
+    <blockquote>
+      <p>"Doctors diagnose, patients describe what they feel. You have to focus on symptoms, you have to focus on pain and desire... If you can speak to the pain or the desire of someone, the underlying thing, then show your expertise within the video, you will get significantly more reach."</p>
+      <div class="quote-meta"><span class="day-pill d1">Day 1</span></div>
+    </blockquote>
+    <blockquote>
+      <p>"Albert Einstein actually said: the true sign of genius is simplification... The individuals that can speak to a 5th grader level are the ones that are really smart, cause you actually understand the pain of what the person is undergoing."</p>
+      <div class="quote-meta"><span class="day-pill d1">Day 1</span></div>
+    </blockquote>
+    <table class="compare-table" style="border-radius:10px;overflow:hidden">
+      <thead><tr><th>❌ Expert Talk (échoue)</th><th>✅ Symptom-First (fonctionne)</th></tr></thead>
+      <tbody>
+        <tr><td>"Color theory undertones and contour mapping"</td><td>"Ton maquillage est beau en vrai mais disparaît en photo ? Voilà pourquoi."</td></tr>
+        <tr><td>"Evidence-based circadian rhythm optimization"</td><td>"Tu dors 8h mais tu es épuisée à 14h — voilà ce qui se passe."</td></tr>
+        <tr><td>"Mastering competency-based interviews with STAR"</td><td>"Tu penses avoir l'entretien dans la poche mais ils ne rappellent pas — voilà pourquoi."</td></tr>
+        <tr><td>"Les avantages du PEA"</td><td>"Personne ne te dit pourquoi le PEA bat l'assurance-vie pour 80% des investisseuses."</td></tr>
+      </tbody>
+    </table>
+    <blockquote>
+      <p>"Transformations don't have to be large in scope. Even these small moments of shifts in perspective and thought and behavior is enough in your content to prove to people that you're a real human being and they can see themselves in you. It's powerful storytelling content."</p>
+      <div class="quote-meta"><span class="day-pill d1">Day 1</span></div>
+    </blockquote>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 03 MISSIONS -->
+<!-- ══════════════════════════════════════ -->
+<div id="missions" class="page">
+  <div class="hero">
+    <div class="eyebrow">Creator College — Day 3 & Day 4</div>
+    <h1>Les 4 <em>Missions</em> de Contenu</h1>
+    <p class="hero-sub">Chaque post doit avoir une mission. Ce framework est la colonne vertébrale de tout. Sans les 4, le système s'effondre.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Vue d'ensemble</h2></div>
+    <blockquote>
+      <p>"If you do not post all four missions of content, guess what? You will 100% fail. 100% fail."</p>
+      <div class="quote-meta"><span class="day-pill d3">Day 3</span></div>
+    </blockquote>
+    <div class="missions-grid">
+      <div class="mission-card attract">
+        <div class="mission-label">01 — Attract</div>
+        <div class="mission-goal">Faire découvrir</div>
+        <div class="mission-desc">Toucher des inconnus. Tu parles AVEC eux, pas AU-DESSUS. Tu étais comme eux.</div>
+        <ul class="mission-examples">
+          <li>Storytelling de transformation</li>
+          <li>Formats tendance + angle perso unique</li>
+          <li>"J'avais peur d'investir."</li>
+          <li>"Mon premier virement en bourse."</li>
+        </ul>
+      </div>
+      <div class="mission-card nurture">
+        <div class="mission-label">02 — Nurture</div>
+        <div class="mission-goal">Fidéliser</div>
+        <div class="mission-desc">Retenir les abonnés. Vulnérabilité calibrée = loyauté. Les unfollows = manque de nurture.</div>
+        <ul class="mission-examples">
+          <li>Réalité, pas la perfection</li>
+          <li>"Ce mois-ci j'ai raté une opportunité."</li>
+          <li>Behind-the-scenes création</li>
+          <li>"Ce que je changerais à 25 ans."</li>
+        </ul>
+      </div>
+      <div class="mission-card position">
+        <div class="mission-label">03 — Position</div>
+        <div class="mission-goal">Établir l'autorité</div>
+        <div class="mission-desc">Prouver l'expertise. Montrer tes preuves — la crédibilité se prouve, elle ne se déclare pas.</div>
+        <ul class="mission-examples">
+          <li>Certifications AMF / ARPP</li>
+          <li>"J'ai analysé 16 SCPIs."</li>
+          <li>Comparatifs ETF avec ton portefeuille</li>
+          <li>Angle compliance = différenciateur</li>
+        </ul>
+      </div>
+      <div class="mission-card convert">
+        <div class="mission-label">04 — Convert</div>
+        <div class="mission-goal">Générer des revenus</div>
+        <div class="mission-desc">Transformer l'attention en action. Un seul CTA. Ne convertir qu'après attract + nurture + position.</div>
+        <ul class="mission-examples">
+          <li>Reprendre le meilleur post attract</li>
+          <li>ManyChat : "Commente INVEST"</li>
+          <li>"Semaine Money Smart lundi."</li>
+          <li>1 convert pour 6-7 non-convert</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout warn"><strong>Règle critique :</strong> Ne jamais faire du convert sans avoir d'abord attract + nurture + position. Sinon tu brûles une petite audience saturée en répétant le même message aux mêmes personnes.</div>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Planning type — 7 posts/semaine</h2></div>
+    <table class="data-table">
+      <thead><tr><th>Jour</th><th>Mission</th><th>Format suggéré</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Lundi</strong></td><td><span class="mission-pill pill-attract">Attract</span></td><td>Reel storytelling</td></tr>
+        <tr><td><strong>Mardi</strong></td><td><span class="mission-pill pill-position">Position</span></td><td>Carrousel éducatif</td></tr>
+        <tr><td><strong>Mercredi</strong></td><td><span class="mission-pill pill-attract">Attract</span></td><td>Reel tendance + angle perso</td></tr>
+        <tr><td><strong>Jeudi</strong></td><td><span class="mission-pill pill-nurture">Nurture</span></td><td>B-roll + texte (réalité)</td></tr>
+        <tr><td><strong>Vendredi</strong></td><td><span class="mission-pill pill-position">Position</span></td><td>Reel expertise</td></tr>
+        <tr><td><strong>Samedi</strong></td><td><span class="mission-pill pill-convert">Convert</span></td><td>Reel + CTA unique</td></tr>
+        <tr><td><strong>Dimanche</strong></td><td><span class="mission-pill pill-attract">Attract</span></td><td>Carrousel grand public</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Signaux d'alerte</h2></div>
+    <blockquote>
+      <p>"Everyone else is faking it... If you have a brand building moment, a certification, an accolade, a success... You should show that."</p>
+      <div class="quote-meta"><span class="day-pill d3">Day 3</span></div>
+    </blockquote>
+    <table class="data-table">
+      <thead><tr><th>Symptôme observé</th><th>Mission manquante probable</th></tr></thead>
+      <tbody>
+        <tr><td>Stagnation des abonnés</td><td><span class="mission-pill pill-attract">Attract</span> insuffisant — ajouter 2 posts attract/semaine</td></tr>
+        <tr><td>Unfollows inhabituels</td><td><span class="mission-pill pill-nurture">Nurture</span> insuffisant — poster vulnérabilité calibrée</td></tr>
+        <tr><td>Engagement élevé mais ventes faibles</td><td><span class="mission-pill pill-position">Position</span> + <span class="mission-pill pill-convert">Convert</span> mal structurés</td></tr>
+        <tr><td>Ventes ponctuelles, pas de récurrence</td><td>Funnel global à optimiser — renforcer l'entonnoir</td></tr>
+      </tbody>
+    </table>
+    <blockquote>
+      <p>"What we have in common is struggle... They actually see themselves in you and they want you for the transformation."</p>
+      <div class="quote-meta"><span class="day-pill d3">Day 3</span></div>
+    </blockquote>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 04 HOOKS -->
+<!-- ══════════════════════════════════════ -->
+<div id="hooks" class="page">
+  <div class="hero">
+    <div class="eyebrow">Creator College — Day 2</div>
+    <h1>Les 5 types de <em>Hooks</em></h1>
+    <p class="hero-sub">Un bon hook = le spectateur DOIT savoir ce qui vient ensuite. Test : "Est-ce que ça crée un besoin de continuer ?" Si non, réécrire.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>La métrique n°1 — Skip Rate</h2></div>
+    <blockquote>
+      <p>"Skip rate is number one. What does skip rate mean? It means the percentage of people that skipped within the first three seconds. So if you have a low skip rate, it means good hook."</p>
+      <div class="quote-meta"><span class="day-pill d2">Day 2</span></div>
+    </blockquote>
+    <blockquote>
+      <p>"A curiosity gap is simply the bridge between what the viewer already knows and what the viewer wants to know."</p>
+      <div class="quote-meta"><span class="day-pill d2">Day 2</span></div>
+    </blockquote>
+    <blockquote>
+      <p>"Pain is twice as motivating as pleasure. Fear of doing something wrong beats curiosity about doing it right. That is how we are wired."</p>
+      <div class="quote-meta"><span class="day-pill d2">Day 2</span></div>
+    </blockquote>
+    <div class="metric-row">
+      <div class="metric-rank rank-1">1</div>
+      <div class="metric-content"><div class="metric-name">Skip Rate</div><div class="metric-desc">Pourcentage qui zappe dans les 3 premières secondes. <strong>La métrique la plus importante.</strong> Un mauvais hook = le post ne sera jamais distribué.</div></div>
+      <div class="metric-bar"><div class="metric-fill" style="width:100%"></div></div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-rank rank-2">2</div>
+      <div class="metric-content"><div class="metric-name">Watch Time</div><div class="metric-desc">Durée moyenne de visionnage. B-roll + caption = watch time naturellement élevé.</div></div>
+      <div class="metric-bar"><div class="metric-fill" style="width:65%"></div></div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-rank rank-3">3</div>
+      <div class="metric-content"><div class="metric-name">Engagement</div><div class="metric-desc">Likes, commentaires, partages, saves. Important mais secondaire au watch time.</div></div>
+      <div class="metric-bar"><div class="metric-fill" style="width:40%"></div></div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Les 5 hooks verbaux</h2></div>
+    <div class="hooks-grid">
+      <div class="hook-card">
+        <div class="hook-number">01</div>
+        <div class="hook-name">Question</div>
+        <div class="hook-principle">Le spectateur cherche mentalement la réponse — il ne peut pas partir avant de l'avoir.</div>
+        <div class="hook-example">"Tu fais quoi avec ton épargne qui dort à 2% ?"</div>
+        <div class="hook-tip">Appeler explicitement ta cible dans les 3 premières secondes augmente la rétention.</div>
+      </div>
+      <div class="hook-card">
+        <div class="hook-number">02</div>
+        <div class="hook-name">Liste chiffrée</div>
+        <div class="hook-principle">Le cerveau aime les structures — il veut connaître TOUS les items. Mettre le point le plus fort EN PREMIER (re-hook).</div>
+        <div class="hook-example">"3 erreurs que font les femmes avec leur PEA"</div>
+        <div class="hook-tip">Utiliser 3, 5 ou 10 items uniquement. Les autres chiffres performent mal.</div>
+      </div>
+      <div class="hook-card">
+        <div class="hook-number">03</div>
+        <div class="hook-name">Storytelling</div>
+        <div class="hook-principle">Le cerveau sait que toute histoire a une fin. Il ne peut pas partir avant la résolution.</div>
+        <div class="hook-example">"J'ai investi 10 000€ sans rien comprendre. Voilà ce qui s'est passé."</div>
+        <div class="hook-tip">Ne jamais révéler la résolution dans le hook — maintenir la tension.</div>
+      </div>
+      <div class="hook-card">
+        <div class="hook-number">04</div>
+        <div class="hook-name">Négatif</div>
+        <div class="hook-principle">La peur de rater est 2× plus forte que le désir de gagner. Maintenir le ton de danger dans tout le contenu.</div>
+        <div class="hook-example">"Ne mets jamais ton argent là-dedans avant de lire ça."</div>
+        <div class="hook-tip">Le sentiment de danger doit persister dans tout le contenu après le hook.</div>
+      </div>
+      <div class="hook-card">
+        <div class="hook-number">05</div>
+        <div class="hook-name">Contrarien</div>
+        <div class="hook-principle">Déclenche un désaccord ou une curiosité. Le contenu doit JUSTIFIER la position — sinon perte de confiance.</div>
+        <div class="hook-example">"L'ETF SP500 n'est pas le meilleur investissement pour toi."</div>
+        <div class="hook-tip">Le reste du contenu doit assumer et démontrer la position contrariante.</div>
+      </div>
+    </div>
+    <blockquote>
+      <p>"My hook sucked until I understood the psychology of it... Simply put, we understood the psychology of hooks."</p>
+      <div class="quote-meta"><span class="day-pill d2">Day 2</span></div>
+    </blockquote>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Bon hook vs Mauvais hook — Exemples réels</h2></div>
+    <table class="compare-table" style="border-radius:10px;overflow:hidden">
+      <thead><tr><th>❌ Mauvais hook</th><th>✅ Bon hook</th></tr></thead>
+      <tbody>
+        <tr><td>"Comment investir en bourse"</td><td>"Tu peux vivre des intérêts de ton portefeuille. Voici à partir de combien."</td></tr>
+        <tr><td>"Les avantages du PEA"</td><td>"Personne ne te dit pourquoi le PEA bat l'assurance-vie pour 80% des investisseuses."</td></tr>
+        <tr><td>"L'importance d'épargner"</td><td>"J'économise depuis 5 ans. Mon patrimoine n'a pas bougé. Voilà pourquoi."</td></tr>
+        <tr><td>"Tout sur les SCPI"</td><td>"J'ai analysé 16 SCPI. Ces 3-là je n'y toucherais jamais."</td></tr>
+        <tr><td>"Comment diversifier"</td><td>"Ne diversifie pas avant d'avoir compris ça."</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Performances réelles — hooks</h2></div>
+    <table class="data-table">
+      <thead><tr><th>Type</th><th>Hook</th><th>Vues</th></tr></thead>
+      <tbody>
+        <tr><td>Question</td><td>"Should athletes eat pasta or rice before their game? Both." — Kelsey Poulter</td><td><strong>3,1M</strong></td></tr>
+        <tr><td>Liste chiffrée</td><td>"Here are my top five most useful subreddits, coming from someone who's achieved financial freedom in her 20s" — Vincent</td><td><strong>1,4M</strong></td></tr>
+        <tr><td>Storytelling</td><td>"I had a C-section four weeks ago, and the number of people I know that have had a C-section that have acted like it's no big deal is one million people"</td><td><strong>870K</strong></td></tr>
+        <tr><td>Négatif</td><td>"The Stoics say you need to stop doing these five things. Don't suffer imagined troubles..." — The Daily Stoic</td><td><strong>2M</strong></td></tr>
+        <tr><td>Contrarien</td><td>"Not so friendly reminder that you need to be playing dumb at work. Like stupid." — Emily</td><td><strong>19,9M</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 05 FORMATS -->
+<!-- ══════════════════════════════════════ -->
+<div id="formats" class="page">
+  <div class="hero">
+    <div class="eyebrow">Creator College — Day 2 & Day 5</div>
+    <h1>Le <em>Format Multiplier</em></h1>
+    <p class="hero-sub">Ne jamais repartir de zéro. Sur un seul sujet, 15 posts. La systématisation bat la créativité brute.</p>
+  </div>
+
+  <div class="block">
+    <div class="formula-box">
+      <div class="formula-text">1 sujet <span>×</span> 5 hooks <span>×</span> 3 formats <span>=</span> 15 posts</div>
+      <div class="formula-sub">Sur un seul sujet, sans jamais repartir de zéro</div>
+    </div>
+    <blockquote>
+      <p>"That's the hidden secret and I'm giving it to you now... We're not starting from scratch. We certainly don't have the time for it."</p>
+      <div class="quote-meta"><span class="day-pill d2">Day 2</span></div>
+    </blockquote>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Les 3 formats à maîtriser</h2></div>
+    <div class="formats-grid">
+      <div class="format-card">
+        <div class="format-icon">🎙</div>
+        <div class="format-name">Face caméra (Talking Head)</div>
+        <div class="format-time">~30 min · CapCut / Instagram Edits</div>
+        <div class="format-desc">Tu parles à ton téléphone comme en FaceTime. Filmer ligne par ligne — aucune mémorisation complète. Idéal pour le storytelling, l'expertise, le nurture.</div>
+      </div>
+      <div class="format-card">
+        <div class="format-icon">🎞</div>
+        <div class="format-name">Carrousel</div>
+        <div class="format-time">~15 min · Canva</div>
+        <div class="format-desc">Slides éducatives. Une idée par slide, titre court + description courte, pas de surcharge. Idéal pour les comparatifs, listes, pédagogie structurée.</div>
+      </div>
+      <div class="format-card">
+        <div class="format-icon">📽</div>
+        <div class="format-name">B-roll + texte</div>
+        <div class="format-time">~10 min · Instagram natif</div>
+        <div class="format-desc">Vidéo de toi en action + hook en overlay + valeur en caption. Le B-roll n'a pas besoin d'être lié au sujet. La caption porte la valeur complète.</div>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>Avantage B-roll :</strong> lire la caption prend plus de temps que la durée de la vidéo → Instagram interprète ça comme du watch time élevé. Rétention naturellement haute.
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Exemple complet — "Choisir son premier ETF"</h2></div>
+    <div style="overflow-x:auto">
+      <table class="data-table">
+        <thead><tr><th>Hook</th><th>Face caméra</th><th>Carrousel</th><th>B-roll + texte</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Question</strong></td><td>"Quel ETF choisir en premier ?"</td><td>"ETF : 5 questions à te poser avant d'acheter"</td><td>"La question que personne ne pose avant son premier ETF"</td></tr>
+          <tr><td><strong>Négatif</strong></td><td>"Ne choisis pas ton ETF sans regarder ça d'abord"</td><td>"3 ETF que les débutantes achètent par erreur"</td><td>"Arrête d'acheter des ETF au hasard"</td></tr>
+          <tr><td><strong>Contrarien</strong></td><td>"Le SP500 n'est pas toujours le bon choix"</td><td>"SP500 vs ETF monde : ce que les chiffres disent vraiment"</td><td>"Tout le monde dit SP500. Voilà quand c'est une erreur."</td></tr>
+          <tr><td><strong>Storytelling</strong></td><td>"Mon premier ETF : l'erreur que j'aurais pu éviter"</td><td>"Ce que j'aurais aimé savoir avant mon premier ETF"</td><td>"Il y a 3 ans je ne savais pas choisir un ETF. Voilà ce qui a changé."</td></tr>
+          <tr><td><strong>Liste chiffrée</strong></td><td>"3 critères pour choisir un ETF en moins de 5 min"</td><td>"Les 5 chiffres à regarder avant un ETF"</td><td>"3 ETF que j'aurais achetés à 25 ans"</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top:16px">→ <strong>15 posts sur un seul sujet</strong>, sans jamais repartir de zéro.</div>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Trial Reels — Tester sans risque</h2></div>
+    <div class="info-row">
+      <div class="info-chip"><div class="chip-dot"></div>Visible aux non-abonnés uniquement</div>
+      <div class="info-chip"><div class="chip-dot"></div>Zéro pression sur l'audience existante</div>
+      <div class="info-chip"><div class="chip-dot"></div>Plusieurs versions possibles</div>
+    </div>
+    <div class="callout"><strong>Méthode recommandée :</strong> Filmer 4 vidéos en batch → toutes en Trial Reels avec variantes (hook différent, visuels modifiés) → une version sur le feed principal. Ne pas reposter le contenu identique — Meta le détecte comme redondant.</div>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Bon vs Mauvais contenu — Grille Day 5</h2></div>
+    <table class="compare-table" style="border-radius:10px;overflow:hidden">
+      <thead><tr><th>❌ Mauvais contenu</th><th>✅ Bon contenu</th></tr></thead>
+      <tbody>
+        <tr><td>"Hey tout le monde, bienvenue..."</td><td>Hook fort dès la première seconde — manque de curiosité immédiat</td></tr>
+        <tr><td>"Hey les gars" (adresse au pluriel)</td><td>Au singulier — parler à UNE personne directement</td></tr>
+        <tr><td>Centré sur soi / ses succès</td><td>Ouvrir sur la douleur de l'audience, pas la tienne</td></tr>
+        <tr><td>Monologue sans structure</td><td>Re-hook clair à chaque changement d'idée</td></tr>
+        <tr><td>Listes de 4 ou 8 items</td><td>Toujours 3, 5 ou 10 items</td></tr>
+        <tr><td>Titre à l'écran = ce qui est dit à l'oral</td><td>Titre + voix = deux choses différentes et complémentaires</td></tr>
+      </tbody>
+    </table>
+    <blockquote>
+      <p>"If you show your Rolex and your Lamborghini wondering why nobody cares — nobody cares. They care about the struggle."</p>
+      <div class="quote-meta"><span class="day-pill d5">Day 5</span></div>
+    </blockquote>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 06 PRODUCTION -->
+<!-- ══════════════════════════════════════ -->
+<div id="production" class="page">
+  <div class="hero">
+    <div class="eyebrow">Creator College — Day 5</div>
+    <h1>Production <em>vidéo</em></h1>
+    <p class="hero-sub">Deux formats à maîtriser. Un processus rigoureux pour chacun. Chaque semaine : un Talking Head ET un Silent Film — les deux sont obligatoires.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Talking Head — 5 étapes</h2><span class="badge clay">~30 min</span></div>
+    <ol class="steps-list">
+      <li><div class="step-num">1</div><div class="step-content"><div class="step-title">Choisir une idée</div><div class="step-desc">Issue de tes 4 missions (attract, nurture, position, convert). Une idée = un post. Ne pas mélanger.</div></div></li>
+      <li><div class="step-num">2</div><div class="step-content"><div class="step-title">Dicter librement</div><div class="step-desc">Parler à voix haute sans se censurer via l'outil dictation (Claude, ChatGPT). Durée libre — même 45 min. Ne pas filtrer en direct.</div></div></li>
+      <li><div class="step-num">3</div><div class="step-content"><div class="step-title">Réécrire dans sa propre voix</div><div class="step-desc">L'étape "zéro à un" — la plus difficile. L'IA donne une base. Toi tu diriges, tu itères. Environ 10-15 min.</div></div></li>
+      <li><div class="step-num">4</div><div class="step-content"><div class="step-title">Filmer ligne par ligne</div><div class="step-desc">Lire une ligne → regarder caméra → dire la ligne → relire la suivante. Pas de mémorisation. Même Grace Beverly et June Yu font comme ça.</div></div></li>
+      <li><div class="step-num">5</div><div class="step-content"><div class="step-title">Couper les silences</div><div class="step-desc">Enlever les "euh", hésitations, tangentes. Le fond peut changer entre les prises — personne ne le voit grâce aux coupes.</div></div></li>
+    </ol>
+    <blockquote>
+      <p>"All of us creators suck at speaking in front of the camera and memorizing our lines. So guess what none of us actually do — we record one line at a time."</p>
+      <div class="quote-meta"><span class="day-pill d1">Day 1</span></div>
+    </blockquote>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Silent Film — Méthode "Skyfall"</h2><span class="badge">Sans paroles</span></div>
+    <p style="color:var(--g700); margin-bottom:20px">Nommé d'après le hook de la chanson d'Adele — une montée en tension qui promet un dénouement. 60% des viewers regardent sans son.</p>
+    <ol class="steps-list">
+      <li><div class="step-num">1</div><div class="step-content"><div class="step-title">Commencer par la lutte</div><div class="step-desc">Pas le luxe, pas les succès. La douleur du point de départ — le dénominateur commun humain. Les gens s'identifient à la lutte, pas aux trophées.</div></div></li>
+      <li><div class="step-num">2</div><div class="step-content"><div class="step-title">Musique à montée progressive</div><div class="step-desc">Pas un son tendance. Une musique qui crée de la tension subconsciente — l'attente du dénouement. Le spectateur reste pour voir la résolution.</div></div></li>
+      <li><div class="step-num">3</div><div class="step-content"><div class="step-title">Ajouter des timestamps</div><div class="step-desc">Janvier… Février… Mars… Montre que la transformation arrive. Construit l'anticipation et signale que quelque chose va changer.</div></div></li>
+      <li><div class="step-num">4</div><div class="step-content"><div class="step-title">Peaufiner le rythme</div><div class="step-desc">Lire chaque ligne à voix haute avant de poster. La ligne est fine entre "rapide et engageant" et "trop vite et déstabilisant".</div></div></li>
+    </ol>
+    <blockquote>
+      <p>"If you can read it aloud, the viewer can follow at the same pace."</p>
+      <div class="quote-meta"><span class="day-pill d5">Day 5</span></div>
+    </blockquote>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Règle "No Zone" — Placement du texte à l'écran</h2></div>
+    <div class="nozone-wrap">
+      <div class="nozone-visual">
+        <div class="nozone-right"><div class="nozone-label red" style="writing-mode:vertical-rl">DANGER</div></div>
+        <div class="nozone-bottom"><div class="nozone-label red">DANGER</div></div>
+        <div class="nozone-safe"><div class="nozone-label green">SAFE</div></div>
+      </div>
+      <div class="nozone-desc">
+        <div style="margin-bottom:20px">
+          <h3 style="color:#EF4444; margin-bottom:10px">Zones à éviter</h3>
+          <ul class="piege-list" style="margin:0">
+            <li class="piege-item"><span class="piege-icon">🚫</span><div class="piege-text"><strong>Bas de l'écran</strong><span>Masque la photo de profil et la légende — perd la rétention</span></div></li>
+            <li class="piege-item"><span class="piege-icon">🚫</span><div class="piege-text"><strong>Côté droit</strong><span>Masque les boutons save / share / comment</span></div></li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="color:var(--olive); margin-bottom:10px">Zone safe</h3>
+          <ul class="checklist" style="margin:0">
+            <li><div class="check-box"></div><span>Haut et centre-gauche de l'écran</span></li>
+            <li><div class="check-box"></div><span>Une ligne à la fois, remonter progressivement</span></li>
+            <li><div class="check-box"></div><span>Police petite — ne pas envahir l'écran</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Content Study Homework — La méthode des 9</h2></div>
+    <div class="study-steps">
+      <div class="study-step"><div class="study-big">3</div><div class="study-label">créatrices à admirer</div><div class="study-sub">Finance, business, inspiration — dans ou hors de ta niche</div></div>
+      <div class="study-step"><div class="study-big">×3</div><div class="study-label">posts outliers chacune</div><div class="study-sub">Ceux qui dépassent fortement leur moyenne de vues</div></div>
+      <div class="study-step"><div class="study-big">=9</div><div class="study-label">vidéos à disséquer</div><div class="study-sub">Identifier les patterns récurrents, pas copier un seul post</div></div>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Critère</th><th>Question à se poser</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Hook</strong></td><td>Visuel, texte ou son dans les 3 premières secondes ?</td></tr>
+        <tr><td><strong>Style</strong></td><td>Voix off / Silent film / Talking head ?</td></tr>
+        <tr><td><strong>Montage</strong></td><td>Prises dynamiques ou statiques ? Vitesse de montage ?</td></tr>
+        <tr><td><strong>Durée</strong></td><td>Combien de secondes ? Taux de complétion ?</td></tr>
+        <tr><td><strong>Audio</strong></td><td>Son tendance, musique, arc émotionnel, tension, curiosité ?</td></tr>
+        <tr><td><strong>CTA</strong></td><td>Quel mot clé ? Comment et où placé ?</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 07 VENDRE -->
+<!-- ══════════════════════════════════════ -->
+<div id="vendre" class="page">
+  <div class="hero">
+    <div class="eyebrow">Creator College — Day 4</div>
+    <h1>Vendre sans <em>vendre</em></h1>
+    <p class="hero-sub">Le contenu ne vend pas directement. Il construit la confiance pour que les gens viennent en DM d'eux-mêmes.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Le mécanisme qui fonctionne</h2></div>
+    <blockquote>
+      <p>"There's nothing magnetic about constantly pitching and constantly selling."</p>
+      <div class="quote-meta"><span class="day-pill d4">Day 4</span></div>
+    </blockquote>
+    <blockquote>
+      <p>"The whole primary focus of content is having inbound and the ability for you to close in DMs. When you're having a conversation with someone in the DMs, it's like that doesn't happen to normal people. It's because you're posting that content online that people find you and they have the trust."</p>
+      <div class="quote-meta"><span class="day-pill d4">Day 4</span></div>
+    </blockquote>
+    <ol class="steps-list">
+      <li><div class="step-num">1</div><div class="step-content"><div class="step-title">Créer du contenu personnel, humain, vulnérable</div><div class="step-desc">Attirer la bonne audience en montrant qui tu es vraiment — pas tes succès, ta lutte</div></div></li>
+      <li><div class="step-num">2</div><div class="step-content"><div class="step-title">Construire la confiance</div><div class="step-desc">Les gens te découvrent, te consomment, se reconnaissent dans ton contenu</div></div></li>
+      <li><div class="step-num">3</div><div class="step-content"><div class="step-title">Inbound DMs</div><div class="step-desc">Ils viennent te demander d'eux-mêmes comment travailler avec toi — sans que tu aies vendu</div></div></li>
+      <li><div class="step-num">4</div><div class="step-content"><div class="step-title">Close en DM ou via stories</div><div class="step-desc">Conversation one-to-one — qualification, connexion, proposition</div></div></li>
+    </ol>
+    <blockquote>
+      <p>"Your first 10 sales, your first 10 DMs, your first 10 clients — everything one-to-one."</p>
+      <div class="quote-meta"><span class="day-pill d4">Day 4</span></div>
+    </blockquote>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Cas réels — résultats DM</h2></div>
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-name">Erica</div>
+        <div class="result-from">Coach Latina — Magnetic Mastermind</div>
+        <div class="result-stat">$20 000</div>
+        <div class="result-detail">11 clients high ticket en 4 semaines — tout depuis les DMs, sans lancement ouvert. 80% ont re-signé pour le round suivant.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-name">Melissa</div>
+        <div class="result-from">Thérapeute relationnelle · 500K abonnés</div>
+        <div class="result-stat">$10–15K/mois</div>
+        <div class="result-detail">Produit à $127 · 100K personnes sur liste email via freebies · première vidéo à 4M vues (post-tennis, non maquillée)</div>
+      </div>
+      <div class="result-card">
+        <div class="result-name">Danielle</div>
+        <div class="result-from">Coach</div>
+        <div class="result-stat">$150 000</div>
+        <div class="result-detail">Nouveau cash en un mois unique grâce au bon attract content + croissance de 7 000 abonnés</div>
+      </div>
+    </div>
+    <blockquote>
+      <p>"Now I feel like it's a disservice for me not to show up. People's lives will not be transformed if I don't show up."</p>
+      <div class="quote-meta"><span class="day-pill d4">Day 4</span> <em style="font-size:12px;color:var(--g500)">— Erica, alumni VIP</em></div>
+    </blockquote>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Séquence DM automatisée (ManyChat)</h2></div>
+    <ol class="steps-list">
+      <li><div class="step-num">1</div><div class="step-content"><div class="step-title">Message auto unique (non robotique)</div><div class="step-desc">"Oui, laisse-moi te trouver le lien. Deux minutes. D'abord, c'est quoi ton email ?"</div></div></li>
+      <li><div class="step-num">2</div><div class="step-content"><div class="step-title">Suivi manuel le lendemain</div><div class="step-desc">Vraie conversation — poser des questions sur leur situation actuelle</div></div></li>
+      <li><div class="step-num">3</div><div class="step-content"><div class="step-title">Questions de qualification</div><div class="step-desc">"Depuis combien de temps tu essaies ? Quel est ton objectif ? Tu peux t'engager sur 3 mois ?"</div></div></li>
+      <li><div class="step-num">4</div><div class="step-content"><div class="step-title">Réservation d'appel</div><div class="step-desc">Calendly — pas de formulaire de candidature (trop de friction). Rendre ça simple.</div></div></li>
+    </ol>
+    <blockquote>
+      <p>"The number one thing people do wrong is they're selling the wrong thing to the wrong people."</p>
+      <div class="quote-meta"><span class="day-pill d4">Day 4</span></div>
+    </blockquote>
+    <div class="callout">Pas de communauté avec 17 abonnés → ça ne marchera pas, faire le math. Commencer par : "Si quelqu'un me donnait 10 000€, qu'est-ce que je pourrais faire pour lui ?" → c'est ça ton offre de départ.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 08 IA & WORKFLOW -->
+<!-- ══════════════════════════════════════ -->
+<div id="ia" class="page">
+  <div class="hero">
+    <div class="eyebrow">Creator College — Day 1, 2 & 5</div>
+    <h1>IA &amp; <em>Workflow</em></h1>
+    <p class="hero-sub">L'IA générique sans contexte donne des résultats génériques. Ce qui fait la différence : le briefing de ta voix, de ton audience, de tes règles.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Pourquoi l'IA échoue sans contexte</h2></div>
+    <blockquote>
+      <p>"AI's response will only be good as the context you give it... AI has to be trained upon a data set, and because the accessible data set is open forums like Reddit, Wikipedia, blogs that are outdated... what it's done is it's trained upon very bad general outdated information."</p>
+      <div class="quote-meta"><span class="day-pill d1">Day 1</span></div>
+    </blockquote>
+    <blockquote>
+      <p>"Where is it pulling that data? 22% Reddit threads, 60% outdated blogs..."</p>
+      <div class="quote-meta"><span class="day-pill d2">Day 2</span></div>
+    </blockquote>
+    <div class="callout warn"><strong>GIGO :</strong> Garbage In, Garbage Out. Un prompt vague donne une réponse vague. La clé = donner un contexte riche, précis, personnel.</div>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Brain Guide — Briefer l'IA sur ta voix</h2></div>
+    <div class="code-block">
+<span class="comment"># À coller comme contexte système dans chaque session de création</span>
+
+<span class="key">Rôle IA :</span> <span class="val">"Tu es un stratège de contenu senior avec 10+ ans d'expérience
+à construire des marques personnelles dans la finance."</span>
+
+<span class="key">Ma voix :</span> <span class="val">Pédagogique, sans condescendance, directe, crédible mais accessible.
+Sans jargon inutile.</span>
+
+<span class="key">3 piliers :</span> <span class="val">Éducation financière femmes / Analyse de marchés / Liberté financière</span>
+
+<span class="key">Mon histoire :</span> <span class="val">Ancienne banque d'investissement Hong Kong, certifiée AMF,
+expatriée Maurice, créatrice "Mon Éducation Financière"</span>
+
+<span class="key">Audience — désirs :</span> <span class="val">Investir intelligemment, comprendre sans jargon,
+gagner en autonomie financière</span>
+
+<span class="key">Audience — frustrations :</span> <span class="val">Sentiment de ne pas être légitime,
+ne pas savoir par où commencer</span>
+
+<span class="key">Règles :</span>
+  <span class="val">- Priorité : compréhension du lecteur (pas sonner impressionnant)
+  - Chaque idée = hook fort + valeur + re-hook
+  - Compliance : "les performances passées ne préjugent pas des performances futures"
+  - Jamais "Smart Money" — toujours "Money Smart"
+  - Pas de tiret cadratin — pas de &amp;
+  - Orthographe : œ (cœur, œuvre) jamais oe</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Workflow IA de production</h2></div>
+    <ol class="steps-list">
+      <li><div class="step-num">1</div><div class="step-content"><div class="step-title">Dicter librement</div><div class="step-desc">Parler ses idées à voix haute dans un outil de dictation — sans se censurer. Durée libre, même 45 min.</div></div></li>
+      <li><div class="step-num">2</div><div class="step-content"><div class="step-title">Coller dans un doc avec le Brain Guide</div><div class="step-desc">Importer la dictée brute avec le contexte complet de ta voix comme system prompt</div></div></li>
+      <li><div class="step-num">3</div><div class="step-content"><div class="step-title">Réécrire dans sa propre voix</div><div class="step-desc">10-15 min de révision — l'IA donne une base structurée, toi tu diriges et personalises</div></div></li>
+      <li><div class="step-num">4</div><div class="step-content"><div class="step-title">Filmer ligne par ligne</div><div class="step-desc">Le script final → tournage direct sans mémorisation complète</div></div></li>
+    </ol>
+    <div class="callout">L'IA ne remplace pas ton angle unique, ta relation avec l'audience, ni ton jugement éditorial. Elle accélère la production — elle ne remplace pas la créativité.</div>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Prompt type — Génération de hooks</h2></div>
+    <div class="code-block">
+Tu es une experte en contenu pour créateurs finance.
+Mon audience : femmes francophones 25-45 ans, débutantes à intermédiaires.
+Mon positionnement : ancienne banque d'investissement Hong Kong,
+certifiée AMF, ton pédagogique sans condescendance.
+Sujet du post : [SUJET]
+Génère 5 hooks (un par type : question / liste / storytelling / négatif / contrarien)
+pour un Reel Instagram de 60 secondes.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 09 MONÉTISATION -->
+<!-- ══════════════════════════════════════ -->
+<div id="monetisation" class="page">
+  <div class="hero">
+    <div class="eyebrow">Creator College — Day 3, 4 & 5</div>
+    <h1>Monétisation &amp; <em>MAP Framework</em></h1>
+    <p class="hero-sub">Deux piliers : produits digitaux (contrôle total) et brand deals. La matrice MAP pour aligner taille d'audience et type d'offre.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>MAP Framework — Quel modèle selon ton audience</h2></div>
+    <div class="map-4">
+      <div class="map-h" style="background:transparent;color:transparent;box-shadow:none">—</div>
+      <div class="map-h">Expertise élevée</div>
+      <div class="map-h">Expertise faible</div>
+      <div class="map-label">Grande<br>audience</div>
+      <div class="map-go"><div class="map-go-label">Recommandé</div><div class="map-go-title">LOW TICKET</div><div class="map-go-desc">Volume game — nombreuses petites ventes. Avec 115K abonnés + certifications, c'est le bon modèle.</div></div>
+      <div class="map-wait">Construire l'expertise d'abord avant de vendre</div>
+      <div class="map-label">Petite<br>audience</div>
+      <div class="map-go"><div class="map-go-label">À cette étape</div><div class="map-go-title">HIGH TICKET</div><div class="map-go-desc">Coaching 1:1 à 1 000–10 000€. Puis scaler vers du group program.</div></div>
+      <div class="map-wait">Construire l'audience d'abord avant de vendre en volume</div>
+    </div>
+    <div class="callout"><strong>Exemple mathématique :</strong> 1 000 abonnés → 10% voient les stories (100) → 10% cliquent (10) → 3% convertissent → <strong>0,3 vente</strong>. Sans volume, le low ticket ne fonctionne pas.</div>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Funnel — Contenu gratuit → Formation payante</h2></div>
+    <div class="funnel-flow">
+      <div class="funnel-step-box"><div class="funnel-step-num">Étape 1</div><div class="funnel-step-name">Contenu gratuit</div><div class="funnel-step-desc">IG / TikTok / YT — attract + nurture + position</div></div>
+      <div class="funnel-arrow-box">→</div>
+      <div class="funnel-step-box"><div class="funnel-step-num">Étape 2</div><div class="funnel-step-name">Lead Magnet</div><div class="funnel-step-desc">Webinaire live (meilleur) · Mini-formation · PDF (moins efficace)</div></div>
+      <div class="funnel-arrow-box">→</div>
+      <div class="funnel-step-box" style="border-radius:0 10px 10px 0; border-color:var(--clay)"><div class="funnel-step-num" style="color:var(--clay)">Étape 3</div><div class="funnel-step-name">Offre payante</div><div class="funnel-step-desc">Appel Calendly · Coaching 1:1 · Formation groupe</div></div>
+    </div>
+    <div class="callout">Format convert le plus efficace : (1) Identifier le meilleur post attract/nurture/position, (2) Créer une version convert avec le même angle + CTA explicite, (3) ManyChat : "Commente INVEST et je t'envoie le lien".</div>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Résultats réels — étudiants Creator College</h2></div>
+    <div class="results-grid">
+      <div class="result-card"><div class="result-name">Michael</div><div class="result-from">Coach perte de poids · 29K abonnés au départ</div><div class="result-stat">100M+</div><div class="result-detail">Vues en 4 semaines · 70K abonnés · $40K sur une vidéo · 18 employés</div></div>
+      <div class="result-card"><div class="result-name">Dr. Kibi</div><div class="result-from">Psychologue clinicienne · 200 abonnés</div><div class="result-stat">15K abonnés</div><div class="result-detail">3M vues en 30 jours · invitée en podcast · bourse NIH avec Brown University</div></div>
+      <div class="result-card"><div class="result-name">Felicity Morgan</div><div class="result-from">Coach</div><div class="result-stat">$100 000</div><div class="result-detail">Générés d'une seule vidéo · 137K abonnés</div></div>
+      <div class="result-card"><div class="result-name">Alanda</div><div class="result-from">4 semaines d'entraînement intensif</div><div class="result-stat">$160 000</div><div class="result-detail">En conversions sur la période de formation</div></div>
+      <div class="result-card"><div class="result-name">Jenna</div><div class="result-from">Ex-enseignante</div><div class="result-stat">$500 000</div><div class="result-detail">Générés · 500K abonnés · a quitté l'enseignement</div></div>
+      <div class="result-card"><div class="result-name">Uni</div><div class="result-from">900 posts · stagnée à 17K</div><div class="result-stat">76 800</div><div class="result-detail">Abonnés · 12 reels à millions de vues · a quitté son 9-to-5</div></div>
+    </div>
+    <blockquote>
+      <p>"La structure et la régularité mènent au succès."</p>
+      <div class="quote-meta"><span class="day-pill d5">Day 5</span> <em style="font-size:12px;color:var(--g500)">— Michael (100M vues en 30 jours)</em></div>
+    </blockquote>
+    <blockquote>
+      <p>"Don't break the wheel — if it works, keep doing it."</p>
+      <div class="quote-meta"><span class="day-pill d5">Day 5</span></div>
+    </blockquote>
+  </div>
+
+  <div class="block">
+    <div class="block-title"><h2>Checklist stratégique — avant de poster</h2></div>
+    <ul class="checklist">
+      <li><div class="check-box" onclick="toggle(this)"></div><span class="check-text">Ce post a une mission claire (attract / nurture / position / convert)</span></li>
+      <li><div class="check-box" onclick="toggle(this)"></div><span class="check-text">Le hook crée un besoin de savoir ce qui suit — pas de "Hey les gars"</span></li>
+      <li><div class="check-box" onclick="toggle(this)"></div><span class="check-text">Les 3 premières secondes sont irréprochables (hook verbal + visuel)</span></li>
+      <li><div class="check-box" onclick="toggle(this)"></div><span class="check-text">Le post a un seul message, une seule action</span></li>
+      <li><div class="check-box" onclick="toggle(this)"></div><span class="check-text">J'ouvre sur la douleur de l'audience, pas sur mes succès</span></li>
+      <li><div class="check-box" onclick="toggle(this)"></div><span class="check-text">Si c'est une liste : 3, 5 ou 10 items (pas 4, pas 8)</span></li>
+      <li><div class="check-box" onclick="toggle(this)"></div><span class="check-text">Le texte évite la zone bas de l'écran et le côté droit</span></li>
+      <li><div class="check-box" onclick="toggle(this)"></div><span class="check-text">Un seul CTA par post (pas 3 CTA différents)</span></li>
+      <li><div class="check-box" onclick="toggle(this)"></div><span class="check-text">Pour brand deals : mention "Collaboration commerciale" + disclaimer légal</span></li>
+      <li><div class="check-box" onclick="toggle(this)"></div><span class="check-text">Toujours "Money Smart" — jamais "Smart Money"</span></li>
+      <li><div class="check-box" onclick="toggle(this)"></div><span class="check-text">Ton "doux-amer" — pédagogique sans être condescendant</span></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  function scrollTo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const offset = el.getBoundingClientRect().top + window.scrollY - 56;
+    window.scrollTo({ top: offset, behavior: 'smooth' });
+  }
+
+  // Scroll spy — update active nav button based on scroll position
+  window.addEventListener('scroll', () => {
+    const pages = document.querySelectorAll('.page');
+    const navH = 60;
+    let current = null;
+    pages.forEach(p => {
+      if (p.getBoundingClientRect().top <= navH) current = p.id;
+    });
+    if (current) {
+      document.querySelectorAll('nav button[data-page]').forEach(b => {
+        b.classList.toggle('active', b.dataset.page === current);
+      });
+    }
+  }, { passive: true });
+
+  function toggle(box) {
+    box.classList.toggle('done');
+    const text = box.nextElementSibling;
+    text.classList.toggle('done');
+    box.innerHTML = box.classList.contains('done')
+      ? '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6L5 9L10 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+      : '';
+  }
+</script>
+
+</body>
+</html>
